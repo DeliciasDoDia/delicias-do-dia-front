@@ -26,7 +26,7 @@ export default function RecipePagina() {
         <h1>{recipe.name}</h1>
         <p>Description: {recipe.description}</p>
         <section>
-          <img src="#" alt={recipe.imageUrl} />
+          <img src={recipe.imageUrl} alt="Imagem da receita" />
           <div>
             <h3>Informações</h3>
             <h4>Número de pessoas ou porções</h4>
