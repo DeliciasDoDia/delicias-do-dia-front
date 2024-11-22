@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import Link from "next/link";
-import { getRecipes } from "@/util/api";
+import { getRecipes } from "@/util/apiRecipe";
 import CardRecipe from "./components/CardRecipe/CardRecipe";
 
 

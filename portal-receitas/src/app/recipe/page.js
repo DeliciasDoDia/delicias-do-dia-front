@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link";
-import { getRecipeById } from "@/util/api";
+import { getRecipeById } from "@/util/apiRecipe";
 import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react";
 
