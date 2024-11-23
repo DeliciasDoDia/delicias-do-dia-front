@@ -1,18 +1,17 @@
 // ----- READ -----
-export async function getCategories() {
+export async function getIngredients() {
   try {
-    const response = await fetch("http://localhost:8080/api/categories");
+    const response = await fetch("http://localhost:8080/api/ingredients");
     const data = await response.json();
-    console.log(data)
     return data;
   } catch (error) {
     console.log("ERROR: " + error);
   }
 }
 
-export async function getCategoryById(id) {
+export async function getIngredientById(id) {
   try {
-    const response = await fetch("http://localhost:8080/api/categories/" + id);
+    const response = await fetch("http://localhost:8080/api/ingredients/" + id);
     const data = await response.json();
     return data;
   } catch (error) {
