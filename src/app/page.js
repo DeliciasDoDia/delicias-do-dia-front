@@ -38,6 +38,7 @@ export default function Home() {
       <Header />
       <main>
 
+        
         <Search setRecipes={setRecipes} setSelectedCategory={setSelectedCategory} />
 
         <div className="flex gap-10">
@@ -51,7 +52,7 @@ export default function Home() {
             ))) : <p>Loading</p>}
           </aside>
 
-          <section className="grid grid-cols-1 gap-4 w-full md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <section className="grid grid-cols-1 gap-4 w-full h-full md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {recipes ? (recipes.map((recipe) => (
               <Link className="justify-center flex" key={recipe.id} href={"/recipe/?id=" + recipe.id}>
                 <Card key={recipe.id} {...recipe} />
