@@ -1,10 +1,12 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import styles from "./page.module.css";
+import Card from "./components/Card";
+import Menu from "./components/Menu";
+import Search from "./components/Search";
 import Link from "next/link";
+
 import { getRecipes } from "@/util/apiRecipe";
-import CardRecipe from "./components/CardRecipe/CardRecipe";
 
 
 export default function Home() {
@@ -16,15 +18,23 @@ export default function Home() {
   }, [])
 
   return (
-    <div className={styles.page}>
-      <h1>Receitas</h1>
-      <div>
-        {recipes ? (recipes.map((recipe) => (
-          <Link key={recipe.id} href={"/recipe/?id=" + recipe.id}>
-            <CardRecipe key={recipe.id} {...recipe} />
-          </Link>
-        ))) : <p>Loading</p>}
-      </div>
-    </div>
+    <>
+      <main>
+        <Search />
+
+        <aside>
+          <Menu />
+        </aside>
+
+        <section>
+          {recipes ? (recipes.map((recipe) => (
+            <Link key={recipe.id} href={"/recipe/?id=" + recipe.id}>
+              <Card key={recipe.id} {...recipe} />
+            </Link>
+          ))) : <p>Loading</p>}
+        </section>
+        {children}
+      </main>
+    </>
   );
 }
