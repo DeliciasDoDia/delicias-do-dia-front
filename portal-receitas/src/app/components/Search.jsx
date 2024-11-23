@@ -1,10 +1,29 @@
-export default function Search() {
+'use client'
+import { useState } from "react";
+import { getRecipesByName, getRecipeByCategory } from "@/util/apiRecipe";
+
+export default function Search({ setRecipes, setSelectedCategory }) {
+	const [searchTerm, setSearchTerm] = useState("");
+
+	const handleSearch = (searchTerm) => {
+		setSelectedCategory("");
+
+		if (searchTerm) {
+			getRecipesByName(searchTerm).then((data) => setRecipes(data));
+		} else {
+			getRecipeByCategory("").then((data) => setRecipes(data));
+		}
+	};
+
+	const handleChange = (e) => {
+		const value = e.target.value;
+		setSearchTerm(value);
+		handleSearch(value);
+	};
 
 	return (
-		<div className='flex content-center text-center	gap-32 items-center'>
-			<h1>
-				Receitas
-			</h1>
+		<div className="flex content-center text-center gap-32 items-center">
+			<h1>Receitas</h1>
 
 			<div className="relative flex items-center w-full h-12 border-[1px] border-gray rounded-full focus-within:shadow-lg bg-white overflow-hidden">
 				<div className="grid place-items-center h-full w-12 text-gray">
@@ -17,7 +36,10 @@ export default function Search() {
 					className="peer h-full w-full outline-none text-sm text-gray pr-2"
 					type="text"
 					id="search"
-					placeholder="Pesquisar..." />
+					placeholder="Pesquisar..."
+					value={searchTerm}
+					onChange={handleChange}
+				/>
 			</div>
 		</div>
 	);
