@@ -7,24 +7,31 @@ import Search from "./components/Search";
 import Header from "./components/Header";
 import Link from "next/link";
 
-import { getRecipes } from "@/util/apiRecipe";
+import { getRecipes, getRecipeByCategory } from "@/util/apiRecipe";
 import { getCategories } from "@/util/apiCategory";
 import Footer from "./components/Footer";
 
 
 export default function Home() {
 
+  const [selectedCategory, setSelectedCategory] = useState('');
+
   const [recipes, setRecipes] = useState(null);
   useEffect(() => {
-    getRecipes()
+    getRecipeByCategory(selectedCategory)
       .then((data) => setRecipes(data))
-  }, [])
+  }, [selectedCategory])
 
   const [categories, setCategories] = useState(null);
   useEffect(() => {
     getCategories()
       .then((data) => setCategories(data))
   }, [])
+
+  const handleCategoryClick = (categoryName) => {
+    console.log('cliquei')
+    setSelectedCategory(categoryName);
+  };
 
   return (
     <body>
@@ -35,10 +42,13 @@ export default function Home() {
 
         <aside>
           {categories ? (categories.map((category) => (
-            <Menu key={category.id} {...category} />
+            <Menu key={category.id} {...category} onClick={() => handleCategoryClick(category.name)}
+              selectedCategory={selectedCategory} // Passa a categoria selecionada
+              setSelectedCategory={setSelectedCategory} // Passa a função para atualizar a categoria selecionada
+              setRecipes={setRecipes} // Passa a função para atualizar as receitas
+            />
           ))) : <p>Loading</p>}
         </aside>
-
 
         <section>
           {recipes ? (recipes.map((recipe) => (
