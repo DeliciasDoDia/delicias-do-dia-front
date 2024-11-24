@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 
-export default function LoginModal({ isOpen, onClose }) {
+export default function LoginModal({ isOpen, onClose, openCadastroModal }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
@@ -88,9 +88,9 @@ export default function LoginModal({ isOpen, onClose }) {
             </div>
             <div className="flex justify-center text-sm text-black">
               Não tem uma conta?&nbsp;
-              <a href="#" className="text-blue-700 font-medium hover:underline">
+              <button className="text-blue-700 font-medium hover:underline" onClick={openCadastroModal}>
                 Crie uma!
-              </a>
+              </button>
             </div>
           </form>
         </div>

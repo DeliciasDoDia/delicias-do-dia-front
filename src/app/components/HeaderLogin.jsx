@@ -17,6 +17,16 @@ export default function HeaderLogin() {
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
+  const openLoginModal = () => {
+    setIsModalLoginOpen(true);
+    setIsModalCadastroOpen(false);
+  };
+
+  const openCadastroModal = () => {
+    setIsModalCadastroOpen(true);
+    setIsModalLoginOpen(false);
+  };
+
   return (
     <header className="bg-yellow rounded-md m-4">
       <nav className="mx-auto flex items-center justify-between p-6 lg:px-8" aria-label="Global">
@@ -63,8 +73,8 @@ export default function HeaderLogin() {
         </Dialog.Panel>
       </Dialog>
 
-      <LoginModal isOpen={isModalLoginOpen} onClose={() => setIsModalLoginOpen(false)} />
-      <CadastroModal isOpen={isModalCadastroOpen} onClose={() => setIsModalCadastroOpen(false)} />
+      <LoginModal isOpen={isModalLoginOpen} onClose={() => setIsModalLoginOpen(false)} openCadastroModal={openCadastroModal} />
+      <CadastroModal isOpen={isModalCadastroOpen} onClose={() => setIsModalCadastroOpen(false)} openLoginModal={openLoginModal} />
     </header>
   );
 }

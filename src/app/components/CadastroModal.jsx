@@ -1,4 +1,11 @@
-export default function CadastroModal({ isOpen, onClose }) {
+'use client';
+
+export default function CadastroModal({ isOpen, onClose, openLoginModal }) {
+  const handleCadastro = (e) => {
+    e.preventDefault();
+    console.log('Cadastro realizado:', { name, email, password });
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -16,7 +23,7 @@ export default function CadastroModal({ isOpen, onClose }) {
           </button>
         </div>
         <div className="p-4 md:p-5">
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleCadastro}>
             <div>
               <label htmlFor="nome" className="block mb-2 text-sm font-medium text-black">
                 Nome
@@ -45,9 +52,9 @@ export default function CadastroModal({ isOpen, onClose }) {
             </div>
             <div className="flex justify-center text-sm text-black">
               Já tem uma conta?&nbsp;
-              <a href="#" className="text-blue-700 font-medium hover:underline">
+              <button className="text-blue-700 font-medium hover:underline" onClick={openLoginModal}>
                 Fazer login
-              </a>
+              </button>
             </div>
           </form>
         </div>
