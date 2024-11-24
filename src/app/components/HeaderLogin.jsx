@@ -37,8 +37,9 @@ export default function HeaderLogin() {
   return (
     <header className="bg-yellow rounded-md m-4">
       <nav className="mx-auto flex items-center justify-between p-6 lg:px-8" aria-label="Global">
-        <a href="#" className="-m-1.5 p-1.5">
-          <Image src="/logo.png" alt="Logo" width={50} height={50} />
+        <a href="/">
+          <span className="sr-only">Delicias do Dia</span>
+          <Image src="/logo.png" alt="" width={80} height={80} />
         </a>
         <div className="flex lg:hidden">
           <button type="button" className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-black" onClick={() => setMobileMenuOpen(true)}>
@@ -71,7 +72,7 @@ export default function HeaderLogin() {
                 <span className="text-base font-semibold text-black cursor-pointer" onClick={() => { setIsModalLoginOpen(true); closeMobileMenu(); }}>
                   Entrar
                 </span>
-                <button className="bg-white text-black px-4 py-2 rounded-full text-base font-semibold hover:bg-background" onClick={() => { setIsModalCadastroOpen(true); ; closeMobileMenu(); }}>
+                <button className="bg-white text-black px-4 py-2 rounded-full text-base font-semibold hover:bg-background" onClick={() => { setIsModalCadastroOpen(true); closeMobileMenu(); }}>
                   Cadastre-se
                 </button>
               </div>
