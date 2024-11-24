@@ -1,11 +1,17 @@
 'use client';
+
 import { useState } from 'react';
-import { Dialog } from '@headlessui/react';
+
+import LoginModal from './LoginModal';
+
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Dialog } from '@headlessui/react';
+
 import Image from 'next/image';
 
 export default function HeaderLogin() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <header className="bg-yellow rounded-md m-4">
@@ -14,12 +20,12 @@ export default function HeaderLogin() {
           <Image src="/logo.png" alt="Logo" width={50} height={50} />
         </a>
         <div className="flex lg:hidden">
-          <button type="button" className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700" onClick={() => setMobileMenuOpen(true)}>
+          <button type="button" className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-black" onClick={() => setMobileMenuOpen(true)}>
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
         <div className="hidden items-center lg:flex lg:gap-x-6">
-          <span className="text-sm font-semibold text-black cursor-pointer">
+          <span className="text-sm font-semibold text-black cursor-pointer" onClick={() => setIsModalOpen(true)}>
             Entrar
           </span>
           <button className="bg-white text-black px-4 py-3 rounded-full text-sm font-semibold hover:bg-background">
@@ -41,7 +47,7 @@ export default function HeaderLogin() {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="py-6 flex flex-col gap-4">
-                <span className="text-base font-semibold text-black cursor-pointer">
+                <span className="text-base font-semibold text-black cursor-pointer" onClick={() => setIsModalOpen(true)}>
                   Entrar
                 </span>
                 <button className="bg-white text-black px-4 py-2 rounded-full text-base font-semibold hover:bg-background">
@@ -52,6 +58,8 @@ export default function HeaderLogin() {
           </div>
         </Dialog.Panel>
       </Dialog>
+
+      <LoginModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </header>
   );
 }
