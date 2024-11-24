@@ -2,13 +2,12 @@
 
 import { useState, useEffect } from 'react';
 
-export default function LoginModal({ isOpen, onClose }) {
+export default function LoginModal({ isOpen, onClose, openCadastroModal, openForgotPasswordModal }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
 
   useEffect(() => {
-    // Verifica se há um e-mail e senha armazenados no localStorage
     const storedEmail = localStorage.getItem('rememberedEmail');
     const storedPassword = localStorage.getItem('rememberedPassword');
     const storedRememberMe = localStorage.getItem('rememberMe') === 'true';
@@ -19,36 +18,30 @@ export default function LoginModal({ isOpen, onClose }) {
     if (storedPassword) {
       setPassword(storedPassword);
     }
-    setRememberMe(storedRememberMe); // Restaurar o valor de "Lembrar de mim"
+    setRememberMe(storedRememberMe);
   }, []);
 
   useEffect(() => {
     if (rememberMe) {
-      // Armazenar e-mail e senha no localStorage
       localStorage.setItem('rememberedEmail', email);
-      localStorage.setItem('rememberedPassword', password); // Salva a senha
-      localStorage.setItem('rememberMe', 'true'); // Salva o estado de "Lembrar de mim"
+      localStorage.setItem('rememberedPassword', password);
+      localStorage.setItem('rememberMe', 'true');
     } else {
-      // Remover e-mail, senha e estado de "Lembrar de mim" do localStorage
       localStorage.removeItem('rememberedEmail');
       localStorage.removeItem('rememberedPassword');
       localStorage.removeItem('rememberMe');
     }
-  }, [email, password, rememberMe]); // Atualiza o localStorage quando email, senha ou "rememberMe" mudam
+  }, [email, password, rememberMe]);
 
   const handleLogin = (e) => {
     e.preventDefault();
-
-    // Simulação de autenticação bem-sucedida
     console.log('Login successful:', { email, password, rememberMe });
-
-    // A autenticação real seria feita aqui
   };
 
   if (!isOpen) return null;
 
   return (
-    <div id="authentication-modal" tabIndex="-1" aria-hidden="true" className="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full h-full bg-black bg-opacity-50" onClick={onClose}>
+    <div id="authentication-modal" tabIndex="-1" className="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full h-full bg-black bg-opacity-50" onClick={onClose}>
       <div className="relative w-full max-w-md bg-white rounded-lg shadow" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between p-4 md:p-5 border-b border-gray rounded-t">
           <h3 className="text-xl font-semibold text-yellow">
@@ -84,9 +77,9 @@ export default function LoginModal({ isOpen, onClose }) {
                   Lembrar de mim
                 </label>
               </div>
-              <a href="#" className="text-sm text-blue-700 hover:underline">
+              <button type="button" className="text-sm text-blue-700 hover:underline" onClick={openForgotPasswordModal}>
                 Esqueceu a senha?
-              </a>
+              </button>
             </div>
             <div className="justify-center flex pt-2">
               <button type="submit" className="w-36 text-black bg-yellow hover:shadow-sm hover:shadow-yellow focus:outline-none font-medium rounded-full text-sm px-5 py-2.5" >
@@ -95,9 +88,9 @@ export default function LoginModal({ isOpen, onClose }) {
             </div>
             <div className="flex justify-center text-sm text-black">
               Não tem uma conta?&nbsp;
-              <a href="#" className="text-blue-700 font-medium hover:underline">
+              <button className="text-blue-700 font-medium hover:underline" onClick={openCadastroModal}>
                 Crie uma!
-              </a>
+              </button>
             </div>
           </form>
         </div>
