@@ -55,7 +55,7 @@ export default function RecipePagina() {
         <h1>{recipe.name}</h1>
         <p className="font-normal my-6">{recipe.description}</p>
         <section className="grid grid-cols-1 md:grid-cols-2 md:gap-7">
-          <img className="rounded-xl w-[800px] h-[450px] object-cover" src={recipe.imageUrl} alt="Imagem da receita" />
+          <img className="rounded-xl w-[800px] h-[450px] object-cover" src={recipe.imageUrl ? recipe.imageUrl : 'https://www.totaltoner.com.br/loja/img/system/sem-imagem.gif'} alt="Imagem da receita" />
           <div>
             <h3 className="my-4 md:mb-6 md:my-0">Informações</h3>
             <h4 className="font-medium">Número de pessoas ou porções</h4>
@@ -91,7 +91,7 @@ export default function RecipePagina() {
 
         <h3 className="my-4 md:mb-6">Modo de Preparo</h3>
         <ul className="leading-7">
-          {recipe.steps.split('\n').map((step, index) => (
+          {recipe.steps.split(';').map((step, index) => (
             <li key={index} className="flex items-start mb-2 border-gray border-b-[1px] pb-2">
               <span className="font-bold text-yellow border border-yellow rounded-full flex items-center justify-center w-8 h-8 mr-4">
                 {index + 1}.

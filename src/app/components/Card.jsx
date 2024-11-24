@@ -4,7 +4,7 @@ export default function Card({ name, prepTimeMinutes, servings, imageUrl }) {
 	return (
 		<div className="max-w-sm bg-white rounded-lg shadow-xl w-80 h-72 md:h-[350px]">
 			<div className="p-4">
-				<img className="rounded-lg h-32 w-80 object-cover" src={imageUrl} alt="" />
+				<img className="rounded-lg h-32 w-80 object-cover" src={imageUrl ? imageUrl:'https://www.totaltoner.com.br/loja/img/system/sem-imagem.gif'} alt="" />
 			</div>
 			<div className="px-4">
 				<h5 className="mb-5 font-bold text-xl text-black truncate overflow-hidden whitespace-nowrap w-56">{name}</h5>

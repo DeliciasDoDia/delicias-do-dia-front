@@ -1,11 +1,10 @@
 import Image from 'next/image';
 
-export default function Menu({ name, iconUrl, selectedCategory, setSelectedCategory, setRecipes }) {
+export default function Menu({id, name, iconUrl, selectedCategory, setSelectedCategory}) {
   
   const handleClick = () => {
     if (selectedCategory === name) {
       setSelectedCategory(null); 
-      setRecipes([]); 
     } else {
       setSelectedCategory(name); 
     }

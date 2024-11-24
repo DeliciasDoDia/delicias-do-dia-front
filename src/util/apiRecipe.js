@@ -1,3 +1,16 @@
+// ----- CREATE -----
+export async function addRecipe(recipe) {
+  try {
+    const response = await fetch("http://localhost:8080/api/recipes",
+      {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(recipe)
+      });
+    return response.status;
+  } catch (error) { console.log("ERROR: " + error); }
+}
+
 // ----- READ -----
 export async function getRecipes() {
   try {
@@ -39,5 +52,35 @@ export async function getRecipeByCategory(categoryName = "") {
     return data;
   } catch (error) {
     console.log("ERROR: " + error);
+  }
+}
+
+// ---------- UPDATE ------------
+export async function updateRecipe(recipe) {
+  try {
+    const response = await fetch("http://localhost:8080/recipes/" + recipe.id,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(recipe)
+      }
+    );
+    return response.status;
+  } catch (error) {
+    console.log("ERROR: " + error)
+  }
+}
+
+// ---------- DELETE ------------
+export async function deleteRecipe(id) {
+  try {
+    const response = await fetch("http://localhost:8080/recipes/" + id,
+      {
+        method: "DELETE",
+      }
+    );
+    return response.status;
+  } catch (error) {
+    console.log("ERROR: " + error)
   }
 }
