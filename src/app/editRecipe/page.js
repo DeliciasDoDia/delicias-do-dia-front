@@ -314,6 +314,7 @@ export default function EditRecipe() {
       </section>
 
       <SuccessModal
+        text={"Receita editada!"}
         isOpen={showModal}
         onClose={() => setShowModal(false)}
         onConfirm={() => router.push('/myRecipes')}

@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-export default function SuccessModal({ isOpen, onClose }) {
+export default function SuccessModal({ text, isOpen, onClose }) {
   const router = useRouter();
 
   const handleBack = () => {
@@ -26,7 +26,7 @@ export default function SuccessModal({ isOpen, onClose }) {
 							<path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
 						</svg>
 						<h3 className="mb-5 text-lg font-normal text-black">
-							Receita atualizada!
+							{text}
 						</h3>
 						<button onClick={handleBack} className="text-white bg-yellow hover:bg-yellow hover:shadow-sm hover:shadow-yellow focus:outline-none font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
 							Voltar

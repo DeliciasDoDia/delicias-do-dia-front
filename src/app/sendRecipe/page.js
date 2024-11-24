@@ -2,24 +2,29 @@
 
 import { useEffect, useState } from "react";
 
-import { addRecipe, getRecipeByCategory } from "@/util/apiRecipe";
+import { addRecipe } from "@/util/apiRecipe";
 import { getCategories } from "@/util/apiCategory";
+import { addIngredient, getIngredientByName } from "@/util/apiIngredient";
+
 import { StarIcon, CurrencyDollarIcon } from "@heroicons/react/24/outline";
 
 import Menu from "../components/Menu";
-import { addIngredient, getIngredientByName, getOrCreateIngredientByName } from "@/util/apiIngredient";
+import SuccessModal from "../components/SuccessModal";
+
+import { useRouter } from "next/navigation";
+
 
 export default function SendRecipePagina() {
+	const router = useRouter();
+
+  const [showModal, setShowModal] = useState(false);
 
 	const [name, setName] = useState('');
 	const [imageUrl, setImageUrl] = useState('');
 	const [description, setDescription] = useState('');
 	const [prepTimeMinutes, setPrepTimeMinutes] = useState('');
 	const [servings, setServings] = useState('');
-	const [difficulty, setDifficulty] = useState('');
 	const [objectCategory, setObjectCategory] = useState(null);
-	const [cost, setCost] = useState('');
-	const [step, setStep] = useState('');
 	const [authorId, setAuthor] = useState(1);
 	const [ingredients, setIngredients] = useState('');
 
@@ -99,7 +104,7 @@ export default function SendRecipePagina() {
 		try {
 			const status = await addRecipe(payload);
 			if (status === 201) {
-				alert("Receita criada com sucesso!");
+				setShowModal(true);
 			} else {
 				console.log("Erro ao criar a receita, status:", status);
 			}
@@ -107,7 +112,6 @@ export default function SendRecipePagina() {
 			console.log("Erro ao enviar a receita:", error);
 		}
 	};
-
 
 	const [selectedStars, setSelectedStars] = useState(0);
 	const [selectedCost, setSelectedCost] = useState(0);
@@ -282,15 +286,21 @@ export default function SendRecipePagina() {
 							</button>
 						</div>
 						<button
-							className="bg-yellow text-white rounded-full px-4 py-2"
+              className="bg-yellow text-black font-semibold py-3 px-5 rounded-full hover:bg-yellow hover:shadow-sm hover:shadow-yellow"
 							type="submit"
 						>
 							Enviar receita
 						</button>
 					</form>
-
 				</div>
 			</section>
+
+			<SuccessModal
+				text={"Receita enviada!"}
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        onConfirm={() => router.push('/myRecipes')}
+      />
 		</main>
 	);
 }
