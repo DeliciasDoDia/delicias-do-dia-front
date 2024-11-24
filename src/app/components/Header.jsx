@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
+import UserSettingsModal from './UserSettingsModal';
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -12,6 +13,7 @@ const navigation = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isModalEdicaoOpen, setIsModalEdicaoOpen] = useState(false);
 
   return (
     <header className="bg-yellow rounded-md m-4">
@@ -40,7 +42,7 @@ export default function Header() {
               {item.name}
             </a>
           ))}
-          <UserCircleIcon className='size-10' />
+          <UserCircleIcon className='size-10 cursor-pointer' onClick={() => setIsModalEdicaoOpen(true)} />
         </div>
       </nav>
       <Dialog
@@ -82,6 +84,10 @@ export default function Header() {
           </div>
         </Dialog.Panel>
       </Dialog>
+
+      {isModalEdicaoOpen && (
+        <UserSettingsModal isOpen={isModalEdicaoOpen} onClose={() => setIsModalEdicaoOpen(false)} />
+      )}
     </header>
   );
 }
