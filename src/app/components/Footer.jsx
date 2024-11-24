@@ -1,14 +1,10 @@
-'use client'
-
 export default function Footer() {
   return (
-    <footer className="bg-white dark:bg-gray-900">
-      <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+    <div>
+      <div className="mx-auto w-full p-4 py-6 px-6 lg:py-8">
         <div className="md:flex md:justify-between text-center content-between">
           <div className="mb-6 md:mb-0">
-            <a href="/" className="flex items-center">
-              <img src="/logo.png" className="h-[50px] me-3" alt="FlowBite Logo" />
-            </a>
+            <img src="/logo.png" className="h-[50px] me-3" alt="Delicias do Dia Logo" />
           </div>
           <div className="gap-8 sm:gap-6">
             <div className="flex mt-4 sm:justify-center sm:mt-0 gap-3">
@@ -39,6 +35,6 @@ export default function Footer() {
           <span className="text-sm text-black sm:text-center"> Todos os direitos reservados.</span>
         </div>
       </div>
-    </footer>
+    </div>
   );
 }

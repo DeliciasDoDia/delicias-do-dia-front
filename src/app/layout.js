@@ -1,3 +1,6 @@
+// import Banner from "./components/Banner";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 import "./globals.css";
 
 export const metadata = {
@@ -18,7 +21,10 @@ export default function RootLayout({ children }) {
         <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Exo:ital,wght@0,100..900;1,100..900&family=Yeseva+One&display=swap" rel="stylesheet"></link>
       </head>
       <body>
+        <Header />
+        {/* <Banner /> */}
         {children}
+        <Footer />
       </body>
     </html>
   );

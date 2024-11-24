@@ -1,16 +1,15 @@
 "use client"
 
 import { useEffect, useState } from "react";
+
 import Card from "./components/Card";
 import Menu from "./components/Menu";
 import Search from "./components/Search";
-import Header from "./components/Header";
+
 import Link from "next/link";
 
-import { getRecipes, getRecipeByCategory } from "@/util/apiRecipe";
+import { getRecipeByCategory } from "@/util/apiRecipe";
 import { getCategories } from "@/util/apiCategory";
-import Footer from "./components/Footer";
-
 
 export default function Home() {
 
@@ -35,10 +34,7 @@ export default function Home() {
 
   return (
     <body>
-      <Header />
       <main>
-
-        
         <Search setRecipes={setRecipes} setSelectedCategory={setSelectedCategory} />
 
         <div className="flex gap-10">
@@ -61,7 +57,6 @@ export default function Home() {
           </section>
         </div>
       </main>
-      <Footer />
     </body>
   );
 }

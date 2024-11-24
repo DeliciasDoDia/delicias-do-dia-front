@@ -5,9 +5,9 @@ import { Bars3Icon, XMarkIcon, UserCircleIcon } from '@heroicons/react/24/outlin
 import Image from 'next/image';
 
 const navigation = [
-  { name: 'Home', href: '#' },
-  { name: 'Receitas', href: '#' },
-  { name: 'Enviar Receita', href: '#' },
+  { name: 'Home', href: '/' },
+  { name: 'Receitas', href: '/allRecipes' },
+  { name: 'Enviar Receita', href: '/sendRecipe' },
 ];
 
 export default function Header() {
