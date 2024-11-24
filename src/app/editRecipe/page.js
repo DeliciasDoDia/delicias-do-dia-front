@@ -40,6 +40,7 @@ export default function EditRecipe() {
         setSelectedStars(data.difficulty)
         setIngredients(data.ingredients.map((i) => i.name).join("\n"))
         setSelectedCost(data.cost)
+        setAuthor(data.author.id)
         setStep(data.steps)
         setSteps(data.steps.split(';'))
       });

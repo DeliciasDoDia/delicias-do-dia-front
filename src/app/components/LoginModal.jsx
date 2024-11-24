@@ -1,5 +1,6 @@
 'use client';
 
+import { getUserLogin } from '@/util/apiUser';
 import { useState, useEffect } from 'react';
 
 export default function LoginModal({ isOpen, onClose, openCadastroModal, openForgotPasswordModal }) {
@@ -35,7 +36,14 @@ export default function LoginModal({ isOpen, onClose, openCadastroModal, openFor
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log('Login successful:', { email, password, rememberMe });
+    getUserLogin(email, password).then((response) => {
+      if (response && response.id) { 
+        console.log('Login successful:', { email, password, rememberMe });
+      } 
+      else {
+        console.log('Erro no login:', response);
+      }
+    })
   };
 
   if (!isOpen) return null;
@@ -49,7 +57,7 @@ export default function LoginModal({ isOpen, onClose, openCadastroModal, openFor
           </h3>
           <button type="button" className="text-black bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8" onClick={onClose}>
             <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
             </svg>
             <span className="sr-only">Fechar modal</span>
           </button>
@@ -66,12 +74,12 @@ export default function LoginModal({ isOpen, onClose, openCadastroModal, openFor
               <label htmlFor="password" className="block mb-2 text-sm font-medium text-black">
                 Senha
               </label>
-              <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" className="bg-white border border-gray text-black text-sm rounded-lg focus:outline-none block w-full p-2.5" required/>
+              <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" className="bg-white border border-gray text-black text-sm rounded-lg focus:outline-none block w-full p-2.5" required />
             </div>
             <div className="flex justify-between">
               <div className="flex items-start">
                 <div className="flex items-center h-5">
-                  <input id="rememberMe" type="checkbox" checked={rememberMe} onChange={() => setRememberMe(!rememberMe)} className="w-4 h-4 border border-gray text-yellow rounded"/>
+                  <input id="rememberMe" type="checkbox" checked={rememberMe} onChange={() => setRememberMe(!rememberMe)} className="w-4 h-4 border border-gray text-yellow rounded" />
                 </div>
                 <label htmlFor="rememberMe" className="ml-2 text-sm font-medium text-black">
                   Lembrar de mim

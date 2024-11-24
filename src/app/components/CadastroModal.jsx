@@ -1,9 +1,29 @@
 'use client';
 
+import { addUser } from "@/util/apiUser";
+import { useState } from "react";
+
 export default function CadastroModal({ isOpen, onClose, openLoginModal }) {
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+
   const handleCadastro = (e) => {
     e.preventDefault();
-    console.log('Cadastro realizado:', { name, email, password });
+    const payload = {
+      name: name,
+      email: email,
+      password: password,
+    }
+    addUser(payload).then((status) =>{
+      if (status === 201) {
+        console.log('Cadastro realizado com sucesso!');
+      } else {
+        console.log('Erro no cadastro:', status);
+      }
+    })
   };
 
   if (!isOpen) return null;
@@ -28,19 +48,28 @@ export default function CadastroModal({ isOpen, onClose, openLoginModal }) {
               <label htmlFor="nome" className="block mb-2 text-sm font-medium text-black">
                 Nome
               </label>
-              <input type="text" id="nome" className="bg-white border border-gray text-black text-sm rounded-lg focus:outline-none block w-full p-2.5" placeholder="Nome commpleto" required />
+              <input type="text" id="nome" className="bg-white border border-gray text-black text-sm rounded-lg focus:outline-none block w-full p-2.5" placeholder="Nome commpleto"
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)} />
             </div>
             <div>
               <label htmlFor="email" className="block mb-2 text-sm font-medium text-black">
                 E-mail
               </label>
-              <input type="email" id="email" className="bg-white border border-gray text-black text-sm rounded-lg focus:outline-none block w-full p-2.5" placeholder="nome@email.com" required />
+              <input type="email" id="email" className="bg-white border border-gray text-black text-sm rounded-lg focus:outline-none block w-full p-2.5" placeholder="nome@email.com"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)} />
             </div>
             <div>
               <label htmlFor="password" className="block mb-2 text-sm font-medium text-black">
                 Senha
               </label>
-              <input type="password" id="password" placeholder="••••••••" className="bg-white border border-gray text-black text-sm rounded-lg focus:outline-none block w-full p-2.5" required />
+              <input type="password" id="password" placeholder="••••••••" className="bg-white border border-gray text-black text-sm rounded-lg focus:outline-none block w-full p-2.5"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required />
             </div>
             <div className="justify-center flex pt-2">
               <button type="submit" className="w-36 text-black bg-yellow hover:shadow-sm hover:shadow-yellow focus:outline-none font-medium rounded-full text-sm px-5 py-2.5" >
@@ -48,7 +77,7 @@ export default function CadastroModal({ isOpen, onClose, openLoginModal }) {
               </button>
             </div>
             <div className="w-full flex justify-center">
-              <p className="font-normal text-xs w-52 text-center my-3 text-slate-400">Ao clicar em "Criar conta", você concorda com as Política de privacidade.</p>
+              <p className="font-normal text-xs w-52 text-center my-3 text-slate-400">Ao clicar em Criar conta, você concorda com as Política de privacidade.</p>
             </div>
             <div className="flex justify-center text-sm text-black">
               Já tem uma conta?&nbsp;

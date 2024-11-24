@@ -5,7 +5,7 @@ import Menu from "../components/Menu";
 import Search from "../components/Search";
 import MyCard from "../components/MyCard";
 
-import { deleteRecipe, getRecipeByCategory } from "@/util/apiRecipe";
+import { deleteRecipe, getRecipeByUserAndCategory } from "@/util/apiRecipe";
 import { getCategories } from "@/util/apiCategory";
 import DeleteModal from "../components/DeleteModal";
 
@@ -22,7 +22,7 @@ export default function MyRecipesPagina() {
 
 
 	const reloadRecipes = async () => {
-		const data = await getRecipeByCategory(selectedCategory);
+		const data = await getRecipeByUserAndCategory(2, selectedCategory);
 		setRecipes(data);
 	}
 
@@ -42,7 +42,7 @@ export default function MyRecipesPagina() {
 	const [recipes, setRecipes] = useState(null);
 
 	useEffect(() => {
-		getRecipeByCategory(selectedCategory).then((data) => setRecipes(data));
+		getRecipeByUserAndCategory(2, selectedCategory).then((data) => setRecipes(data));
 	}, [selectedCategory]);
 
 	const [categories, setCategories] = useState(null);
