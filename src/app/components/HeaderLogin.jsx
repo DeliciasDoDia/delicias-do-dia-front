@@ -8,10 +8,14 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Dialog } from '@headlessui/react';
 
 import Image from 'next/image';
+import CadastroModal from './CadastroModal';
 
 export default function HeaderLogin() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalLoginOpen, setIsModalLoginOpen] = useState(false);
+  const [isModalCadastroOpen, setIsModalCadastroOpen] = useState(false);
+
+  const closeMobileMenu = () => setMobileMenuOpen(false);
 
   return (
     <header className="bg-yellow rounded-md m-4">
@@ -25,10 +29,10 @@ export default function HeaderLogin() {
           </button>
         </div>
         <div className="hidden items-center lg:flex lg:gap-x-6">
-          <span className="text-sm font-semibold text-black cursor-pointer" onClick={() => setIsModalOpen(true)}>
+          <span className="text-sm font-semibold text-black cursor-pointer" onClick={() => setIsModalLoginOpen(true)}>
             Entrar
           </span>
-          <button className="bg-white text-black px-4 py-3 rounded-full text-sm font-semibold hover:bg-background">
+          <button className="bg-white text-black px-4 py-3 rounded-full text-sm font-semibold hover:bg-background" onClick={() => setIsModalCadastroOpen(true)}>
             Cadastre-se
           </button>
         </div>
@@ -47,10 +51,10 @@ export default function HeaderLogin() {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="py-6 flex flex-col gap-4">
-                <span className="text-base font-semibold text-black cursor-pointer" onClick={() => setIsModalOpen(true)}>
+                <span className="text-base font-semibold text-black cursor-pointer" onClick={() => { setIsModalLoginOpen(true); closeMobileMenu(); }}>
                   Entrar
                 </span>
-                <button className="bg-white text-black px-4 py-2 rounded-full text-base font-semibold hover:bg-background">
+                <button className="bg-white text-black px-4 py-2 rounded-full text-base font-semibold hover:bg-background" onClick={() => { setIsModalCadastroOpen(true); ; closeMobileMenu(); }}>
                   Cadastre-se
                 </button>
               </div>
@@ -59,7 +63,8 @@ export default function HeaderLogin() {
         </Dialog.Panel>
       </Dialog>
 
-      <LoginModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <LoginModal isOpen={isModalLoginOpen} onClose={() => setIsModalLoginOpen(false)} />
+      <CadastroModal isOpen={isModalCadastroOpen} onClose={() => setIsModalCadastroOpen(false)} />
     </header>
   );
 }
