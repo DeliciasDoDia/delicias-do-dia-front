@@ -12,10 +12,6 @@ body {
   background-color: #F9F8F8;
 }
 
-main {
-  padding-inline: 64px;
-}
-
 h1 {
   font-family: 'Yeseva One';
   font-size: 50px;
@@ -32,4 +28,29 @@ h3 {
   color: #FEB428;
   font-weight: 700;
   font-size: 25px;
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  border: px solid #d1d5db;
+  border-radius: 4px;
+  appearance: none; 
+  background-color: white;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #FEB428;
+  border-color: #FEB428;
+  position: relative;
+}
+
+input[type="checkbox"]:checked::before {
+  content: '✓';
+  position: absolute;
+  top: -2px;
+  left: 4px;
+  font-size: 16px;
+  color: #FFF;
 }

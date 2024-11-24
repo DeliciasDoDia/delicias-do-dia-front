@@ -56,9 +56,9 @@ export async function getRecipeByCategory(categoryName = "") {
 }
 
 // ---------- UPDATE ------------
-export async function updateRecipe(recipe) {
+export async function updateRecipe(recipeId, recipe) {
   try {
-    const response = await fetch("http://localhost:8080/recipes/" + recipe.id,
+    const response = await fetch("http://localhost:8080/api/recipes/" + recipeId,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -74,7 +74,7 @@ export async function updateRecipe(recipe) {
 // ---------- DELETE ------------
 export async function deleteRecipe(id) {
   try {
-    const response = await fetch("http://localhost:8080/recipes/" + id,
+    const response = await fetch("http://localhost:8080/api/recipes/" + id,
       {
         method: "DELETE",
       }

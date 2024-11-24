@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 const navigation = [
   { name: 'Home', href: '/' },
-  { name: 'Receitas', href: '/allRecipes' },
+  { name: 'Minhas Receitas', href: '/myRecipes' },
   { name: 'Enviar Receita', href: '/sendRecipe' },
 ];
 
