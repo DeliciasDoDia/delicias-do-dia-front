@@ -2,17 +2,21 @@
 
 import { useEffect, useState } from "react";
 
-import { addRecipe, getRecipeByCategory, getRecipeById, updateRecipe } from "@/util/apiRecipe";
+import { getRecipeById, updateRecipe } from "@/util/apiRecipe";
 import { getCategories } from "@/util/apiCategory";
 import { StarIcon, CurrencyDollarIcon } from "@heroicons/react/24/outline";
 
 import Menu from "../components/Menu";
-import { addIngredient, getIngredientByName, getOrCreateIngredientByName } from "@/util/apiIngredient";
-import { useSearchParams } from "next/navigation";
+import { addIngredient, getIngredientByName } from "@/util/apiIngredient";
+import { useSearchParams, useRouter } from "next/navigation";
+import SuccessModal from "../components/SuccessModal";
 
 export default function EditRecipe() {
   const params = useSearchParams();
   const recipeId = params.get("id");
+  const router = useRouter();
+
+  const [showModal, setShowModal] = useState(false);
 
   const [recipe, setRecipe] = useState(null);
   const [name, setName] = useState('');
@@ -20,9 +24,7 @@ export default function EditRecipe() {
   const [description, setDescription] = useState('');
   const [prepTimeMinutes, setPrepTimeMinutes] = useState('');
   const [servings, setServings] = useState('');
-  const [difficulty, setDifficulty] = useState('');
   const [objectCategory, setObjectCategory] = useState(null);
-  const [cost, setCost] = useState('');
   const [step, setStep] = useState('');
   const [authorId, setAuthor] = useState(1);
   const [ingredients, setIngredients] = useState('');
@@ -117,12 +119,10 @@ export default function EditRecipe() {
       ingredients: validIngredients,
     };
 
-    console.log("Payload enviado:", payload);
-
     try {
       const status = await updateRecipe(recipeId, payload);
       if (status === 200 || status === 201) {
-        alert("Receita criada com sucesso!");
+        setShowModal(true);
       } else {
         console.log("Erro ao criar a receita, status:", status);
       }
@@ -303,15 +303,20 @@ export default function EditRecipe() {
               </button>
             </div>
             <button
-              className="bg-yellow text-white rounded-full px-4 py-2"
+              className="bg-yellow text-black font-semibold py-3 px-5 rounded-full hover:bg-yellow hover:shadow-sm hover:shadow-yellow"
               type="submit"
             >
               Atualizar receita
             </button>
           </form>
-
         </div>
       </section>
+
+      <SuccessModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        onConfirm={() => router.push('/myRecipes')}
+      />
     </main>
   );
 }
