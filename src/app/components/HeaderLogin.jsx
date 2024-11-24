@@ -9,11 +9,13 @@ import { Dialog } from '@headlessui/react';
 
 import Image from 'next/image';
 import CadastroModal from './CadastroModal';
+import ForgotPasswordModal from './ForgotPasswordModal';
 
 export default function HeaderLogin() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isModalLoginOpen, setIsModalLoginOpen] = useState(false);
   const [isModalCadastroOpen, setIsModalCadastroOpen] = useState(false);
+  const [isModalForgotPasswordOpen, setIsModalForgotPasswordOpen] = useState(false); // Novo estado para o modal de recuperação de senha
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
@@ -24,6 +26,11 @@ export default function HeaderLogin() {
 
   const openCadastroModal = () => {
     setIsModalCadastroOpen(true);
+    setIsModalLoginOpen(false);
+  };
+
+  const openForgotPasswordModal = () => {
+    setIsModalForgotPasswordOpen(true);
     setIsModalLoginOpen(false);
   };
 
@@ -73,8 +80,9 @@ export default function HeaderLogin() {
         </Dialog.Panel>
       </Dialog>
 
-      <LoginModal isOpen={isModalLoginOpen} onClose={() => setIsModalLoginOpen(false)} openCadastroModal={openCadastroModal} />
+      <LoginModal isOpen={isModalLoginOpen} onClose={() => setIsModalLoginOpen(false)} openCadastroModal={openCadastroModal} openForgotPasswordModal={openForgotPasswordModal} />
       <CadastroModal isOpen={isModalCadastroOpen} onClose={() => setIsModalCadastroOpen(false)} openLoginModal={openLoginModal} />
+      <ForgotPasswordModal isOpen={isModalForgotPasswordOpen} onClose={() => setIsModalForgotPasswordOpen(false)} openLoginModal={openLoginModal} />
     </header>
   );
 }

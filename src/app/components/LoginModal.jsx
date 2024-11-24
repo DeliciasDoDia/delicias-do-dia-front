@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 
-export default function LoginModal({ isOpen, onClose, openCadastroModal }) {
+export default function LoginModal({ isOpen, onClose, openCadastroModal, openForgotPasswordModal }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
@@ -77,9 +77,9 @@ export default function LoginModal({ isOpen, onClose, openCadastroModal }) {
                   Lembrar de mim
                 </label>
               </div>
-              <a href="#" className="text-sm text-blue-700 hover:underline">
+              <button type="button" className="text-sm text-blue-700 hover:underline" onClick={openForgotPasswordModal}>
                 Esqueceu a senha?
-              </a>
+              </button>
             </div>
             <div className="justify-center flex pt-2">
               <button type="submit" className="w-36 text-black bg-yellow hover:shadow-sm hover:shadow-yellow focus:outline-none font-medium rounded-full text-sm px-5 py-2.5" >
