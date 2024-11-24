@@ -1,6 +1,5 @@
 'use client'
 
-import Link from "next/link";
 import { getRecipeById } from "@/util/apiRecipe";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -50,7 +49,7 @@ export default function RecipePagina() {
   };
 
   return (
-    <main>
+    <main className="px-16">
       <section>
         <h1>{recipe.name}</h1>
         <p className="font-normal my-6">{recipe.description}</p>

@@ -57,7 +57,7 @@ export default function SendRecipePagina() {
 	};
 
 	return (
-		<main>
+		<main className="px-16">
 			<section>
 				<h1>Envie sua receita</h1>
 

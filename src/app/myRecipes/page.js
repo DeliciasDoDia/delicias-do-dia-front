@@ -2,23 +2,38 @@
 
 import { useEffect, useState } from "react";
 import Menu from "../components/Menu";
-import Card from "../components/Card";
 import Search from "../components/Search";
-import Link from "next/link";
+import MyCard from "../components/MyCard";
 
 import { getRecipeByCategory } from "@/util/apiRecipe";
 import { getCategories } from "@/util/apiCategory";
+import DeleteModal from "../components/DeleteModal";
 
+export default function MyRecipesPagina() {
+	const [isModalOpen, setModalOpen] = useState(false);
+	const [selectedRecipeId, setSelectedRecipeId] = useState(null);
 
-export default function AllRecipesPagina() {
+	const handleDeleteClick = (id) => {
+		setSelectedRecipeId(id);
+		setModalOpen(true);
+	};
+
+	const handleConfirmDelete = () => {
+		console.log('Deletando receita com ID:', selectedRecipeId);
+		setModalOpen(false);
+	};
+
+	const handleCloseModal = () => {
+		setModalOpen(false);
+		setSelectedRecipeId(null);
+	};
 
 	const [selectedCategory, setSelectedCategory] = useState('');
-
 	const [recipes, setRecipes] = useState(null);
+
 	useEffect(() => {
-		getRecipeByCategory(selectedCategory)
-			.then((data) => setRecipes(data))
-	}, [selectedCategory])
+		getRecipeByCategory(selectedCategory).then((data) => setRecipes(data));
+	}, [selectedCategory]);
 
 	const [categories, setCategories] = useState(null);
 	useEffect(() => {
@@ -32,7 +47,13 @@ export default function AllRecipesPagina() {
 	};
 
 	return (
-		<main>
+		<main className="px-16">
+			<DeleteModal
+				isOpen={isModalOpen}
+				onClose={handleCloseModal}
+				onConfirm={handleConfirmDelete}
+			/>
+
 			<Search setRecipes={setRecipes} setSelectedCategory={setSelectedCategory} />
 
 			<div className="flex gap-10">
@@ -47,11 +68,9 @@ export default function AllRecipesPagina() {
 				</aside>
 
 				<section className="grid grid-cols-1 gap-4 w-full h-full md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-					{recipes ? (recipes.map((recipe) => (
-						<Link className="justify-center flex" key={recipe.id} href={"/recipe/?id=" + recipe.id}>
-							<Card key={recipe.id} {...recipe} />
-						</Link>
-					))) : <p>Loading</p>}
+					{recipes ? recipes.map((recipe) => (
+						<MyCard key={recipe.id} {...recipe} onDelete={() => handleDeleteClick(recipe.id)} />
+					)) : 'Loading...'}
 				</section>
 			</div>
 		</main>

@@ -10,6 +10,7 @@ import Link from "next/link";
 
 import { getRecipeByCategory } from "@/util/apiRecipe";
 import { getCategories } from "@/util/apiCategory";
+import Banner from "./components/Banner";
 
 export default function Home() {
 
@@ -33,8 +34,10 @@ export default function Home() {
   };
 
   return (
-    <body>
-      <main>
+    <main>
+      <Banner />
+
+      <div className="px-16">
         <Search setRecipes={setRecipes} setSelectedCategory={setSelectedCategory} />
 
         <div className="flex gap-10">
@@ -56,7 +59,7 @@ export default function Home() {
             ))) : <p>Loading</p>}
           </section>
         </div>
-      </main>
-    </body>
+      </div>
+    </main>
   );
 }
