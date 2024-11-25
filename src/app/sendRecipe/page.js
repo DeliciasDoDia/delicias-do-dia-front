@@ -182,16 +182,12 @@ export default function SendRecipePagina() {
 							<div>
 								<h3 className="mb-5 mt-6">Informações</h3>
 								<label htmlFor="pessoas" className="block mb-2 text-sm font-normal text-black">Número de pessoas ou porções</label>
-								<div className="mb-5 flex gap-2">
+								<div className="mb-5 flex gap-2 items-center">
 									<input type="text" id="pessoas" className="bg-white border border-gray text-black text-sm rounded-lg block w-[80px] p-2.5 focus:outline-none"
 										required
 										value={servings}
 										onChange={(e) => setServings(e.target.value)} />
-									<select id="countries" className="bg-white text-black border border-gray text-sm rounded-lg block p-2.5 focus:outline-none">
-										<option>Porção</option>
-										<option>Pessoas</option>
-										<option>Fatias</option>
-									</select>
+									<p className="text-sm">Porção (ões)</p>
 								</div>
 
 								<div className="mb-5">
