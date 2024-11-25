@@ -1,6 +1,6 @@
 'use client';
 
-export default function UserSettingsModal({ isOpen, onClose }) {
+export default function UserSettingsModal({ onClose }) {
 	
 	const handleEdicao = (e) => {
     e.preventDefault();
