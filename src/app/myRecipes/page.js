@@ -72,7 +72,7 @@ export default function MyRecipesPagina() {
 				onConfirm={handleConfirmDelete}
 			/>
 
-			<Search setRecipes={setRecipes} setSelectedCategory={setSelectedCategory} />
+			<Search setRecipes={setRecipes} setSelectedCategory={setSelectedCategory} author={true} user={user?.id}/>
 
 			<div className="flex flex-col gap-10 sm:flex-row">
 				<aside className="flex flex-col items-center">
@@ -85,7 +85,7 @@ export default function MyRecipesPagina() {
 					))) : <p>Loading</p>}
 				</aside>
 
-				<section className={`w-full h-full ${recipes && recipes.length > 0 ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" : "flex justify-center items-center"}`}>
+				<section className={`w-full h-full ${recipes && recipes.length > 0 ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-14 gap-y-4" : "flex justify-center items-center"}`}>
 					{loadingRecipes ? (
 						<p className="text-black text-center">Carregando receitas...</p>
 					) : recipes && recipes.length > 0 ? (

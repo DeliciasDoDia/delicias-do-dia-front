@@ -1,14 +1,17 @@
 'use client'
 import { useState } from "react";
-import { getRecipesByName, getRecipeByCategory } from "@/util/apiRecipe";
+import { getRecipesByName, getRecipeByCategory, getRecipeByUserAndCategory } from "@/util/apiRecipe";
 
-export default function Search({ setRecipes, setSelectedCategory }) {
+export default function Search({ setRecipes, setSelectedCategory, author, user }) {
 	const [searchTerm, setSearchTerm] = useState("");
 
 	const handleSearch = (searchTerm) => {
 		setSelectedCategory("");
 
-		if (searchTerm) {
+		if(author){
+			getRecipeByUserAndCategory(user, searchTerm).then((data) => setRecipes(data));
+		}
+		else if (searchTerm) {
 			getRecipesByName(searchTerm).then((data) => setRecipes(data));
 		} else {
 			getRecipeByCategory("").then((data) => setRecipes(data));

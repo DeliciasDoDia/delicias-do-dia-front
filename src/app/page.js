@@ -1,3 +1,6 @@
+// Geovanna da Silva Lima - 10420059
+// Pedro Henrique Mansano Fernandes - 10388037
+
 "use client"
 
 import { useEffect, useState } from "react";

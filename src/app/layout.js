@@ -1,5 +1,7 @@
+// Geovanna da Silva Lima - 10420059
+// Pedro Henrique Mansano Fernandes - 10388037
+
 import Footer from "./components/Footer";
-import Header from "./components/Header";
 import HeaderLogin from "./components/HeaderLogin";
 import UserProvider from "./context/UserContext";
 import "./globals.css";

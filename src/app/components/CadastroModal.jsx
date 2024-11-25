@@ -60,7 +60,7 @@ export default function CadastroModal({ isOpen, onClose, openLoginModal }) {
                 <label htmlFor="nome" className="block mb-2 text-sm font-medium text-black">
                   Nome
                 </label>
-                <input type="text" id="nome" className="bg-white border border-gray text-black text-sm rounded-lg focus:outline-none block w-full p-2.5" placeholder="Nome commpleto"
+                <input type="text" id="nome" className="bg-white border border-gray text-black text-sm rounded-lg focus:outline-none block w-full p-2.5" placeholder="Nome completo"
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)} />
