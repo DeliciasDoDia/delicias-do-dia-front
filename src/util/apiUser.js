@@ -41,3 +41,19 @@ export async function getUserLogin(email, password) {
     console.log("ERROR: " + error);
   }
 }
+
+// ---------- UPDATE ------------
+export async function updateUser(userId, user) {
+  try {
+    const response = await fetch("http://localhost:8080/api/users/" + userId,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user)
+      }
+    );
+    return response.status;
+  } catch (error) {
+    console.log("ERROR: " + error)
+  }
+}

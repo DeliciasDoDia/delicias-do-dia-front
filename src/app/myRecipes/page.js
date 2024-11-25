@@ -51,7 +51,7 @@ export default function MyRecipesPagina() {
 			setRecipes(data);
 			setLoadingRecipes(false);
 		});
-	}, [selectedCategory]);
+	}, [user?.id, selectedCategory]);
 
 	const [categories, setCategories] = useState(null);
 	useEffect(() => {
@@ -78,9 +78,9 @@ export default function MyRecipesPagina() {
 				<aside className="flex flex-col items-center">
 					{categories ? (categories.map((category) => (
 						<Menu key={category.id} {...category} onClick={() => handleCategoryClick(category.name)}
-							selectedCategory={selectedCategory} // Passa a categoria selecionada
-							setSelectedCategory={setSelectedCategory} // Passa a função para atualizar a categoria selecionada
-							setRecipes={setRecipes} // Passa a função para atualizar as receitas
+							selectedCategory={selectedCategory}
+							setSelectedCategory={setSelectedCategory}
+							setRecipes={setRecipes}
 						/>
 					))) : <p>Loading</p>}
 				</aside>
