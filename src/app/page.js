@@ -35,8 +35,8 @@ export default function Home() {
       <div className="px-16">
         <Search setRecipes={setRecipes} setSelectedCategory={setSelectedCategory} />
 
-        <div className="flex gap-10">
-          <aside className="flex flex-col">
+        <div className="flex flex-col gap-10 sm:flex-row">
+          <aside className="flex flex-col items-center">
             {categories ? (categories.map((category) => (
               <Menu key={category.id} {...category}
                 selectedCategory={selectedCategory}
