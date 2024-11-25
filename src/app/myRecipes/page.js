@@ -14,9 +14,8 @@ export default function MyRecipesPagina() {
 	const [isModalOpen, setModalOpen] = useState(false);
 	const [selectedRecipeId, setSelectedRecipeId] = useState(null);
 	const [recipeId, setRecipeId] = useState(null);
-	const { user } = useContext(UserContext) 
+	const { user } = useContext(UserContext)
 
-	console.log(user)
 
 	const handleDeleteClick = (id) => {
 		setSelectedRecipeId(id);
