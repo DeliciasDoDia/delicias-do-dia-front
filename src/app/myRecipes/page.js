@@ -14,9 +14,11 @@ export default function MyRecipesPagina() {
 	const [isModalOpen, setModalOpen] = useState(false);
 	const [selectedRecipeId, setSelectedRecipeId] = useState(null);
 	const [recipeId, setRecipeId] = useState(null);
-	const { user } = useContext(UserContext) 
+	const { user } = useContext(UserContext)
 
-	console.log(user)
+	const [loadingRecipes, setLoadingRecipes] = useState(false);
+	const [selectedCategory, setSelectedCategory] = useState('');
+	const [recipes, setRecipes] = useState(null);
 
 	const handleDeleteClick = (id) => {
 		setSelectedRecipeId(id);
@@ -25,9 +27,11 @@ export default function MyRecipesPagina() {
 	};
 
 	const reloadRecipes = async () => {
+		setLoadingRecipes(true);
 		const data = await getRecipeByUserAndCategory(user?.id, selectedCategory);
 		setRecipes(data);
-	}
+		setLoadingRecipes(false);
+	};
 
 	const handleConfirmDelete = async () => {
 		console.log('Deletando receita com ID:', selectedRecipeId);
@@ -41,11 +45,12 @@ export default function MyRecipesPagina() {
 		setSelectedRecipeId(null);
 	};
 
-	const [selectedCategory, setSelectedCategory] = useState('');
-	const [recipes, setRecipes] = useState(null);
-
 	useEffect(() => {
-		getRecipeByUserAndCategory(user?.id, selectedCategory).then((data) => setRecipes(data));
+		setLoadingRecipes(true);
+		getRecipeByUserAndCategory(user?.id, selectedCategory).then((data) => {
+			setRecipes(data);
+			setLoadingRecipes(false);
+		});
 	}, [selectedCategory]);
 
 	const [categories, setCategories] = useState(null);
@@ -80,10 +85,19 @@ export default function MyRecipesPagina() {
 					))) : <p>Loading</p>}
 				</aside>
 
-				<section className="grid grid-cols-1 gap-4 w-full h-full md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-					{recipes ? recipes?.map((recipe) => (
-						<MyCard key={recipe.id} {...recipe} onDelete={() => handleDeleteClick(recipe.id)} />
-					)) : 'Loading...'}
+				<section className={`w-full ${recipes && recipes.length > 0 ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" : "flex justify-center items-center"}`}>
+					{loadingRecipes ? (
+						<p className="text-gray-500 text-center">Carregando receitas...</p>
+					) : recipes && recipes.length > 0 ? (
+						recipes.map((recipe) => (
+							<MyCard key={recipe.id} {...recipe} onDelete={() => handleDeleteClick(recipe.id)} />
+						))
+					) : (
+						<div className="flex flex-col justify-center items-center">
+							<img className="w-80" src="/cozinhar.png" />
+							<p className="text-gray-500 text-center">Nenhuma receita encontrada. Que tal adicionar sua primeira?</p>
+						</div>
+					)}
 				</section>
 			</div>
 		</main>
