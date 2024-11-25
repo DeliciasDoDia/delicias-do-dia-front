@@ -4,6 +4,7 @@ import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import UserSettingsModal from './UserSettingsModal';
+import Link from 'next/link';
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -18,10 +19,10 @@ export default function Header() {
   return (
     <header className="bg-yellow rounded-md m-4">
       <nav className="mx-auto flex items-center justify-between p-6 lg:px-8" aria-label="Global">
-        <a href="/">
+        <Link href="/">
           <span className="sr-only">Delicias do Dia</span>
           <Image src="/logo.png" alt="" width={80} height={80} />
-        </a>
+        </Link>
         <div className="flex lg:hidden">
           <button
             type="button"
@@ -34,13 +35,13 @@ export default function Header() {
         </div>
         <div className="hidden items-center lg:flex lg:gap-x-12">
           {navigation.map((item) => (
-            <a
+            <Link
               key={item.name}
               href={item.href}
               className="text-sm font-semibold leading-6 text-gray-900"
             >
               {item.name}
-            </a>
+            </Link>
           ))}
           <UserCircleIcon className='size-10 cursor-pointer' onClick={() => setIsModalEdicaoOpen(true)} />
         </div>
@@ -54,10 +55,10 @@ export default function Header() {
         <div className="fixed inset-0 z-10" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-yellow px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
+            <Link href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <Image src="/logo.png" alt="" width={50} height={50} />
-            </a>
+            </Link>
             <button
               type="button"
               className="-m-2.5 rounded-md p-2.5 text-gray-700"
@@ -71,13 +72,13 @@ export default function Header() {
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
                 {navigation.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
                     href={item.href}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>

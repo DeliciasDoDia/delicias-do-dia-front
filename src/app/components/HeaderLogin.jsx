@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import LoginModal from './LoginModal';
 
@@ -12,13 +12,19 @@ import CadastroModal from './CadastroModal';
 import ForgotPasswordModal from './ForgotPasswordModal';
 import { UserContext } from '../context/UserContext';
 import Header from './Header';
+import Link from 'next/link';
 
 export default function HeaderLogin() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isModalLoginOpen, setIsModalLoginOpen] = useState(false);
   const [isModalCadastroOpen, setIsModalCadastroOpen] = useState(false);
   const [isModalForgotPasswordOpen, setIsModalForgotPasswordOpen] = useState(false); // Novo estado para o modal de recuperação de senha
-  const { user } = useContext(UserContext)
+  const { user, autoLogin, firstLogin, setFirstLogin } = useContext(UserContext);
+  
+  useEffect(() => {
+    !firstLogin && autoLogin()
+    setFirstLogin(true)
+  },[])
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
@@ -43,10 +49,10 @@ export default function HeaderLogin() {
         : (
           <header className="bg-yellow rounded-md m-4">
             <nav className="mx-auto flex items-center justify-between p-6 lg:px-8" aria-label="Global">
-              <a href="/">
+              <Link href="/">
                 <span className="sr-only">Delicias do Dia</span>
                 <Image src="/logo.png" alt="" width={80} height={80} />
-              </a>
+              </Link>
               <div className="flex lg:hidden">
                 <button type="button" className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-black" onClick={() => setMobileMenuOpen(true)}>
                   <Bars3Icon className="h-6 w-6" aria-hidden="true" />
@@ -65,9 +71,9 @@ export default function HeaderLogin() {
               <div className="fixed inset-0 z-10" />
               <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-yellow px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                 <div className="flex items-center justify-between">
-                  <a href="#" className="-m-1.5 p-1.5">
+                  <Link href="/" className="-m-1.5 p-1.5">
                     <Image src="/logo.png" alt="Logo" width={50} height={50} />
-                  </a>
+                  </Link>
                   <button type="button" className="-m-2.5 rounded-md p-2.5 text-black" onClick={() => setMobileMenuOpen(false)}>
                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
