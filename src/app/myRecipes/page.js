@@ -74,8 +74,8 @@ export default function MyRecipesPagina() {
 
 			<Search setRecipes={setRecipes} setSelectedCategory={setSelectedCategory} />
 
-			<div className="flex gap-10">
-				<aside className="flex flex-col">
+			<div className="flex flex-col gap-10 sm:flex-row">
+				<aside className="flex flex-col items-center">
 					{categories ? (categories.map((category) => (
 						<Menu key={category.id} {...category} onClick={() => handleCategoryClick(category.name)}
 							selectedCategory={selectedCategory} // Passa a categoria selecionada
@@ -85,9 +85,9 @@ export default function MyRecipesPagina() {
 					))) : <p>Loading</p>}
 				</aside>
 
-				<section className={`w-full ${recipes && recipes.length > 0 ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" : "flex justify-center items-center"}`}>
+				<section className={`w-full h-full ${recipes && recipes.length > 0 ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" : "flex justify-center items-center"}`}>
 					{loadingRecipes ? (
-						<p className="text-gray-500 text-center">Carregando receitas...</p>
+						<p className="text-black text-center">Carregando receitas...</p>
 					) : recipes && recipes.length > 0 ? (
 						recipes.map((recipe) => (
 							<MyCard key={recipe.id} {...recipe} onDelete={() => handleDeleteClick(recipe.id)} />
@@ -95,7 +95,7 @@ export default function MyRecipesPagina() {
 					) : (
 						<div className="flex flex-col justify-center items-center">
 							<img className="w-80" src="/cozinhar.png" />
-							<p className="text-gray-500 text-center">Nenhuma receita encontrada. Que tal adicionar sua primeira?</p>
+							<p className="text-black text-center">Nenhuma receita encontrada. Que tal adicionar sua primeira?</p>
 						</div>
 					)}
 				</section>

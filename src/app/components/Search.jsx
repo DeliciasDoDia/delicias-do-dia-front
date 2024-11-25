@@ -22,7 +22,7 @@ export default function Search({ setRecipes, setSelectedCategory }) {
 	};
 
 	return (
-		<div className="flex content-center text-center gap-32 items-center">
+		<div className="flex flex-col content-center text-center mb-4 sm:gap-32 sm:mb-0 sm:flex-row items-center">
 			<h1>Receitas</h1>
 
 			<div className="relative flex items-center w-full h-12 border-[1px] border-gray rounded-full focus-within:shadow-lg bg-white overflow-hidden">
