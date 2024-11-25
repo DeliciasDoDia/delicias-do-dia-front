@@ -51,7 +51,7 @@ export default function MyRecipesPagina() {
 			setRecipes(data);
 			setLoadingRecipes(false);
 		});
-	}, [selectedCategory]);
+	}, [user?.id, selectedCategory]);
 
 	const [categories, setCategories] = useState(null);
 	useEffect(() => {
