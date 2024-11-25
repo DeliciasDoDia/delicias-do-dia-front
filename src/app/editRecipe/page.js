@@ -116,7 +116,6 @@ export default function EditRecipe() {
       cost: selectedCost,
       steps: formattedSteps,
       category: objectCategory ? { id: objectCategory.id, name: objectCategory.name } : { id: 11 },
-      author: { id: authorId },
       ingredients: validIngredients,
     };
 

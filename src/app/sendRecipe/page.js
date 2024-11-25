@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { addRecipe } from "@/util/apiRecipe";
 import { getCategories } from "@/util/apiCategory";
@@ -12,12 +12,14 @@ import Menu from "../components/Menu";
 import SuccessModal from "../components/SuccessModal";
 
 import { useRouter } from "next/navigation";
+import { UserContext } from "../context/UserContext";
 
 
 export default function SendRecipePagina() {
+	const { user } = useContext(UserContext)
 	const router = useRouter();
 
-  const [showModal, setShowModal] = useState(false);
+	const [showModal, setShowModal] = useState(false);
 
 	const [name, setName] = useState('');
 	const [imageUrl, setImageUrl] = useState('');
@@ -25,7 +27,6 @@ export default function SendRecipePagina() {
 	const [prepTimeMinutes, setPrepTimeMinutes] = useState('');
 	const [servings, setServings] = useState('');
 	const [objectCategory, setObjectCategory] = useState(null);
-	const [authorId, setAuthor] = useState(1);
 	const [ingredients, setIngredients] = useState('');
 
 	const [categories, setCategories] = useState(null);
@@ -84,7 +85,7 @@ export default function SendRecipePagina() {
 		);
 
 		const validIngredients = ingredientsWithIds.filter(ingredient => ingredient !== null);
-
+		const authorId = user.id;
 		const payload = {
 			name,
 			imageUrl,
@@ -286,7 +287,7 @@ export default function SendRecipePagina() {
 							</button>
 						</div>
 						<button
-              className="bg-yellow text-black font-semibold py-3 px-5 rounded-full hover:bg-yellow hover:shadow-sm hover:shadow-yellow"
+							className="bg-yellow text-black font-semibold py-3 px-5 rounded-full hover:bg-yellow hover:shadow-sm hover:shadow-yellow"
 							type="submit"
 						>
 							Enviar receita
@@ -297,10 +298,10 @@ export default function SendRecipePagina() {
 
 			<SuccessModal
 				text={"Receita enviada!"}
-        isOpen={showModal}
-        onClose={() => setShowModal(false)}
-        onConfirm={() => router.push('/myRecipes')}
-      />
+				isOpen={showModal}
+				onClose={() => setShowModal(false)}
+				onConfirm={() => router.push('/myRecipes')}
+			/>
 		</main>
 	);
 }
