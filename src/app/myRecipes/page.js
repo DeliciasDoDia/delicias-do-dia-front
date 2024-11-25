@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Menu from "../components/Menu";
 import Search from "../components/Search";
 import MyCard from "../components/MyCard";
@@ -8,11 +8,15 @@ import MyCard from "../components/MyCard";
 import { deleteRecipe, getRecipeByUserAndCategory } from "@/util/apiRecipe";
 import { getCategories } from "@/util/apiCategory";
 import DeleteModal from "../components/DeleteModal";
+import { UserContext } from "../context/UserContext";
 
 export default function MyRecipesPagina() {
 	const [isModalOpen, setModalOpen] = useState(false);
 	const [selectedRecipeId, setSelectedRecipeId] = useState(null);
 	const [recipeId, setRecipeId] = useState(null);
+	const { user } = useContext(UserContext) 
+
+	console.log(user)
 
 	const handleDeleteClick = (id) => {
 		setSelectedRecipeId(id);
@@ -20,9 +24,8 @@ export default function MyRecipesPagina() {
 		setModalOpen(true);
 	};
 
-
 	const reloadRecipes = async () => {
-		const data = await getRecipeByUserAndCategory(2, selectedCategory);
+		const data = await getRecipeByUserAndCategory(user?.id, selectedCategory);
 		setRecipes(data);
 	}
 
@@ -42,7 +45,7 @@ export default function MyRecipesPagina() {
 	const [recipes, setRecipes] = useState(null);
 
 	useEffect(() => {
-		getRecipeByUserAndCategory(2, selectedCategory).then((data) => setRecipes(data));
+		getRecipeByUserAndCategory(user?.id, selectedCategory).then((data) => setRecipes(data));
 	}, [selectedCategory]);
 
 	const [categories, setCategories] = useState(null);
@@ -78,7 +81,7 @@ export default function MyRecipesPagina() {
 				</aside>
 
 				<section className="grid grid-cols-1 gap-4 w-full h-full md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-					{recipes ? recipes.map((recipe) => (
+					{recipes ? recipes?.map((recipe) => (
 						<MyCard key={recipe.id} {...recipe} onDelete={() => handleDeleteClick(recipe.id)} />
 					)) : 'Loading...'}
 				</section>

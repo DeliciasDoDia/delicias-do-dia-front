@@ -1,18 +1,25 @@
 'use client';
 
 import { getUserLogin } from '@/util/apiUser';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { UserContext } from '../context/UserContext';
 
 export default function LoginModal({ isOpen, onClose, openCadastroModal, openForgotPasswordModal }) {
+  const [id, setId] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const { login } = useContext(UserContext);
 
   useEffect(() => {
+    const storedId = localStorage.getItem('rememberedId');
     const storedEmail = localStorage.getItem('rememberedEmail');
     const storedPassword = localStorage.getItem('rememberedPassword');
     const storedRememberMe = localStorage.getItem('rememberMe') === 'true';
 
+    if (storedId) {
+      setEmail(storedId);
+    }
     if (storedEmail) {
       setEmail(storedEmail);
     }
@@ -24,21 +31,24 @@ export default function LoginModal({ isOpen, onClose, openCadastroModal, openFor
 
   useEffect(() => {
     if (rememberMe) {
+      localStorage.setItem('rememberedId', id);
       localStorage.setItem('rememberedEmail', email);
       localStorage.setItem('rememberedPassword', password);
       localStorage.setItem('rememberMe', 'true');
     } else {
+      localStorage.removeItem('rememberedId');
       localStorage.removeItem('rememberedEmail');
       localStorage.removeItem('rememberedPassword');
       localStorage.removeItem('rememberMe');
     }
-  }, [email, password, rememberMe]);
+  }, [id, email, password, rememberMe]);
 
   const handleLogin = (e) => {
     e.preventDefault();
     getUserLogin(email, password).then((response) => {
       if (response && response.id) { 
-        console.log('Login successful:', { email, password, rememberMe });
+        login(response)
+        console.log('Login successful:', { id, email, password, rememberMe });
       } 
       else {
         console.log('Erro no login:', response);
