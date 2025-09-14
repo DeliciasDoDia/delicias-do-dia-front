@@ -1,7 +1,8 @@
 // ----- CREATE -----
+const API_BASE_URL = "https://psychic-capybara-9p44qwgqpx639vpr-8080.app.github.dev"
 export async function addRecipe(recipe) {
   try {
-    const response = await fetch("http://localhost:8080/api/recipes",
+    const response = await fetch(API_BASE_URL + "/api/recipes",
       {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
@@ -14,7 +15,7 @@ export async function addRecipe(recipe) {
 // ----- READ -----
 export async function getRecipes() {
   try {
-    const response = await fetch("http://localhost:8080/api/recipes");
+    const response = await fetch(API_BASE_URL + "/api/recipes");
     const data = await response.json();
     return data;
   } catch (error) {
@@ -24,7 +25,7 @@ export async function getRecipes() {
 
 export async function getRecipeById(id) {
   try {
-    const response = await fetch("http://localhost:8080/api/recipes/" + id);
+    const response = await fetch(API_BASE_URL + "/api/recipes/" + id);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -34,7 +35,7 @@ export async function getRecipeById(id) {
 
 export async function getRecipesByName(name) {
   try {
-    const response = await fetch("http://localhost:8080/api/recipes/name/" + name);
+    const response = await fetch(API_BASE_URL + "/api/recipes/name/" + name);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -45,8 +46,8 @@ export async function getRecipesByName(name) {
 export async function getRecipeByCategory(categoryName = "") {
   try {
     const url = categoryName
-      ? `http://localhost:8080/api/recipes?catName=${categoryName}`
-      : "http://localhost:8080/api/recipes";
+      ? `${API_BASE_URL}/api/recipes?catName=${categoryName}`
+      : API_BASE_URL + "/api/recipes";
     const response = await fetch(url);
     const data = await response.json();
     return data;
@@ -58,8 +59,8 @@ export async function getRecipeByCategory(categoryName = "") {
 export async function getRecipeByUserAndCategory(userId, categoryName = "") {
   try {
     const url = categoryName
-      ? `http://localhost:8080/api/recipes/user/${userId}?catName=${categoryName}`
-      : `http://localhost:8080/api/recipes/user/${userId}`;
+      ? `${API_BASE_URL}/api/recipes/user/${userId}?catName=${categoryName}`
+      : `${API_BASE_URL}/api/recipes/user/${userId}`;
     const response = await fetch(url);
     const data = await response.json();
     return data;
@@ -71,7 +72,7 @@ export async function getRecipeByUserAndCategory(userId, categoryName = "") {
 // ---------- UPDATE ------------
 export async function updateRecipe(recipeId, recipe) {
   try {
-    const response = await fetch("http://localhost:8080/api/recipes/" + recipeId,
+    const response = await fetch(API_BASE_URL + "/api/recipes/" + recipeId,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -87,7 +88,7 @@ export async function updateRecipe(recipeId, recipe) {
 // ---------- DELETE ------------
 export async function deleteRecipe(id) {
   try {
-    const response = await fetch("http://localhost:8080/api/recipes/" + id,
+    const response = await fetch(API_BASE_URL + "/api/recipes/" + id,
       {
         method: "DELETE",
       }

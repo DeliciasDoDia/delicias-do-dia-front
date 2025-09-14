@@ -1,7 +1,9 @@
+const API_BASE_URL = "https://psychic-capybara-9p44qwgqpx639vpr-8080.app.github.dev";
+
 // ----- CREATE -----
 export async function addIngredient(ingredient) {
   try {
-    const response = await fetch("http://localhost:8080/api/ingredients",
+    const response = await fetch(API_BASE_URL + "/api/ingredients",
       {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
@@ -23,7 +25,7 @@ export async function addIngredient(ingredient) {
 // ----- READ -----
 export async function getIngredients() {
   try {
-    const response = await fetch("http://localhost:8080/api/ingredients");
+    const response = await fetch(API_BASE_URL + "/api/ingredients");
     const data = await response.json();
     return data;
   } catch (error) {
@@ -33,7 +35,7 @@ export async function getIngredients() {
 
 export async function getIngredientById(id) {
   try {
-    const response = await fetch("http://localhost:8080/api/ingredients/" + id);
+    const response = await fetch(API_BASE_URL + "/api/ingredients/" + id);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -43,7 +45,7 @@ export async function getIngredientById(id) {
 
 export async function getIngredientByName(name) {
   try {
-    const response = await fetch("http://localhost:8080/api/ingredients/name/" + name);
+    const response = await fetch(API_BASE_URL + "/api/ingredients/name/" + name);
     const data = await response.json();
     return data;
   } catch (error) {
