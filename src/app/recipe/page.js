@@ -2,12 +2,13 @@
 
 import { getRecipeById } from "@/util/apiRecipe";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import { useEffect, useState } from "react";
 
 import { UserIcon, ClockIcon, CurrencyDollarIcon, StarIcon } from '@heroicons/react/24/outline';
 import Button from "../components/Button";
 
-export default function RecipePagina() {
+function RecipePaginaContent() {
   const params = useSearchParams();
   const id = params.get("id");
 
@@ -100,7 +101,7 @@ export default function RecipePagina() {
           ))}
         </ul>
 
-        <div className="mt-5 flex flex-col items-center mb-8 md:justify-between md:items-start	md:flex-row">
+        <div className="mt-5 flex flex-col items-center mb-8 md:justify-between md:items-start\tmd:flex-row">
           <div className="flex mb-4 md:mb-0">
             <span className="text-yellow font-semibold">Escrito por: </span>
             <p className="text-black font-normal">&nbsp;{recipe.author.name}</p>
@@ -111,3 +112,12 @@ export default function RecipePagina() {
     </main>
   );
 }
+
+export default function RecipePagina() {
+  return (
+    <Suspense fallback={<main>Carregando...</main>}>
+      <RecipePaginaContent />
+    </Suspense>
+  );
+}
+
