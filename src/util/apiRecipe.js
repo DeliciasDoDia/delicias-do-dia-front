@@ -1,5 +1,6 @@
+const API_BASE_URL = "http://localhost:8080";
+
 // ----- CREATE -----
-const API_BASE_URL = "https://psychic-capybara-9p44qwgqpx639vpr-8080.app.github.dev"
 export async function addRecipe(recipe) {
   try {
     const response = await fetch(API_BASE_URL + "/api/recipes",

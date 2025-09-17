@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://psychic-capybara-9p44qwgqpx639vpr-8080.app.github.dev";
+const API_BASE_URL = "http://localhost:8080";
 
 // ----- READ -----
 export async function getCategories() {
