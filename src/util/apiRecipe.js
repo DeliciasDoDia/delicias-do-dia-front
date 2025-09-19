@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:25000";
+const API_BASE_URL = "http://10.0.2.162:25000";
 
 // ----- CREATE -----
 export async function addRecipe(recipe) {
