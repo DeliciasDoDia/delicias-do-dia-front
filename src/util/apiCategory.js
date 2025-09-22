@@ -1,9 +1,7 @@
-const API_BASE_URL = "http://10.0.2.162:25000";
-
 // ----- READ -----
 export async function getCategories() {
   try {
-    const response = await fetch(API_BASE_URL + "/api/categories");
+    const response = await fetch("/api/categories");
     const data = await response.json();
     return data;
   } catch (error) {
@@ -13,7 +11,7 @@ export async function getCategories() {
 
 export async function getCategoryById(id) {
   try {
-    const response = await fetch(API_BASE_URL + "/api/categories/" + id);
+    const response = await fetch("/api/categories/" + id);
     const data = await response.json();
     return data;
   } catch (error) {

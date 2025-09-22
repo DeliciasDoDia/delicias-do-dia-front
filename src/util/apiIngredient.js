@@ -1,9 +1,7 @@
-const API_BASE_URL = "http://10.0.2.162:25000";
-
 // ----- CREATE -----
 export async function addIngredient(ingredient) {
   try {
-    const response = await fetch(API_BASE_URL + "/api/ingredients",
+    const response = await fetch("/api/ingredients",
       {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
@@ -25,7 +23,7 @@ export async function addIngredient(ingredient) {
 // ----- READ -----
 export async function getIngredients() {
   try {
-    const response = await fetch(API_BASE_URL + "/api/ingredients");
+    const response = await fetch("/api/ingredients");
     const data = await response.json();
     return data;
   } catch (error) {
@@ -35,7 +33,7 @@ export async function getIngredients() {
 
 export async function getIngredientById(id) {
   try {
-    const response = await fetch(API_BASE_URL + "/api/ingredients/" + id);
+    const response = await fetch("/api/ingredients/" + id);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -45,7 +43,7 @@ export async function getIngredientById(id) {
 
 export async function getIngredientByName(name) {
   try {
-    const response = await fetch(API_BASE_URL + "/api/ingredients/name/" + name);
+    const response = await fetch("/api/ingredients/name/" + name);
     const data = await response.json();
     return data;
   } catch (error) {

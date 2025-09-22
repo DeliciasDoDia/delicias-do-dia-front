@@ -1,9 +1,7 @@
-const API_BASE_URL = "http://10.0.2.162:25000";
-
 // ----- CREATE -----
 export async function addRecipe(recipe) {
   try {
-    const response = await fetch(API_BASE_URL + "/api/recipes",
+    const response = await fetch("/api/recipes",
       {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
@@ -16,7 +14,7 @@ export async function addRecipe(recipe) {
 // ----- READ -----
 export async function getRecipes() {
   try {
-    const response = await fetch(API_BASE_URL + "/api/recipes");
+    const response = await fetch("/api/recipes");
     const data = await response.json();
     return data;
   } catch (error) {
@@ -26,7 +24,7 @@ export async function getRecipes() {
 
 export async function getRecipeById(id) {
   try {
-    const response = await fetch(API_BASE_URL + "/api/recipes/" + id);
+    const response = await fetch("/api/recipes/" + id);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -36,7 +34,7 @@ export async function getRecipeById(id) {
 
 export async function getRecipesByName(name) {
   try {
-    const response = await fetch(API_BASE_URL + "/api/recipes/name/" + name);
+    const response = await fetch("/api/recipes/name/" + name);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -48,7 +46,7 @@ export async function getRecipeByCategory(categoryName = "") {
   try {
     const url = categoryName
       ? `${API_BASE_URL}/api/recipes?catName=${categoryName}`
-      : API_BASE_URL + "/api/recipes";
+      : "/api/recipes";
     const response = await fetch(url);
     const data = await response.json();
     return data;
@@ -73,7 +71,7 @@ export async function getRecipeByUserAndCategory(userId, categoryName = "") {
 // ---------- UPDATE ------------
 export async function updateRecipe(recipeId, recipe) {
   try {
-    const response = await fetch(API_BASE_URL + "/api/recipes/" + recipeId,
+    const response = await fetch("/api/recipes/" + recipeId,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -89,7 +87,7 @@ export async function updateRecipe(recipeId, recipe) {
 // ---------- DELETE ------------
 export async function deleteRecipe(id) {
   try {
-    const response = await fetch(API_BASE_URL + "/api/recipes/" + id,
+    const response = await fetch("/api/recipes/" + id,
       {
         method: "DELETE",
       }

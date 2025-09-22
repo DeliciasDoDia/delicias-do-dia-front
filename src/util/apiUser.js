@@ -1,9 +1,7 @@
-const API_BASE_URL = "http://10.0.2.162:25000";
-
 // ----- CREATE -----
 export async function addUser(user) {
   try {
-    const response = await fetch(API_BASE_URL + "/api/users",
+    const response = await fetch("/api/users",
       {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
@@ -16,7 +14,7 @@ export async function addUser(user) {
 // ----- READ -----
 export async function getUsers() {
   try {
-    const response = await fetch(API_BASE_URL + "/api/users");
+    const response = await fetch("/api/users");
     const data = await response.json();
     return data;
   } catch (error) {
@@ -26,7 +24,7 @@ export async function getUsers() {
 
 export async function getUserById(id) {
   try {
-    const response = await fetch(API_BASE_URL + "/api/users/" + id);
+    const response = await fetch("/api/users/" + id);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -36,7 +34,7 @@ export async function getUserById(id) {
 
 export async function getUserLogin(email, password) {
   try {
-    const response = await fetch(API_BASE_URL + "/api/users/" + email + "/" + password);
+    const response = await fetch("/api/users/" + email + "/" + password);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -47,7 +45,7 @@ export async function getUserLogin(email, password) {
 // ---------- UPDATE ------------
 export async function updateUser(userId, user) {
   try {
-    const response = await fetch(API_BASE_URL + "/api/users/" + userId,
+    const response = await fetch("/api/users/" + userId,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
