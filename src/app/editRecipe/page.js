@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 
 import { getRecipeById, updateRecipe } from "@/util/apiRecipe";
 import { getCategories } from "@/util/apiCategory";
+import { Suspense } from "react";
+
 import { StarIcon, CurrencyDollarIcon } from "@heroicons/react/24/outline";
 
 import Menu from "../components/Menu";
@@ -11,7 +13,7 @@ import { addIngredient, getIngredientByName } from "@/util/apiIngredient";
 import { useSearchParams, useRouter } from "next/navigation";
 import SuccessModal from "../components/SuccessModal";
 
-export default function EditRecipe() {
+function EditRecipeContent() {
   const params = useSearchParams();
   const recipeId = params.get("id");
   const router = useRouter();
@@ -315,5 +317,13 @@ export default function EditRecipe() {
         onConfirm={() => router.push('/myRecipes')}
       />
     </main>
+  );
+}
+
+export default function EditRecipePagina() {
+  return (
+    <Suspense fallback={<main>Carregando...</main>}>
+      <EditRecipeContent />
+    </Suspense>
   );
 }
