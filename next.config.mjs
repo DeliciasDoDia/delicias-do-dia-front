@@ -7,8 +7,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/api/:path*',                 // qualquer rota que comece com /api
-        destination: 'http://10.0.2.162:25000/api/:path*', // backend privado
+        source: '/api/:path*',                 
+        destination: 'http://10.0.2.162:25000/api/:path*', 
       },
     ];
   },

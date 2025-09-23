@@ -45,7 +45,7 @@ export async function getRecipesByName(name) {
 export async function getRecipeByCategory(categoryName = "") {
   try {
     const url = categoryName
-      ? `${API_BASE_URL}/api/recipes?catName=${categoryName}`
+      ? `/api/recipes?catName=${categoryName}`
       : "/api/recipes";
     const response = await fetch(url);
     const data = await response.json();
@@ -58,8 +58,8 @@ export async function getRecipeByCategory(categoryName = "") {
 export async function getRecipeByUserAndCategory(userId, categoryName = "") {
   try {
     const url = categoryName
-      ? `${API_BASE_URL}/api/recipes/user/${userId}?catName=${categoryName}`
-      : `${API_BASE_URL}/api/recipes/user/${userId}`;
+      ? `api/recipes/user/${userId}?catName=${categoryName}`
+      : `/api/recipes/user/${userId}`;
     const response = await fetch(url);
     const data = await response.json();
     return data;
