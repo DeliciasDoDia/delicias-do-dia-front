@@ -17,7 +17,7 @@ export default function Menu({id, name, iconUrl, selectedCategory, setSelectedCa
       onClick={handleClick}
     >
       <div className="flex content-center justify-center items-center bg-white rounded-full p-1 h-10 w-10">
-        <Image src={iconUrl} alt={name} width={24} height={24} />
+        <Image src={iconUrl} alt={name} width={24} height={24} unoptimized/>
       </div>
       {name}
     </button>
