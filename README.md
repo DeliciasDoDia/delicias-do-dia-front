@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Delícias do Dia – Cloud Developing 2025/2
 
-## Getting Started
+> CRUD simples + API Gateway + Lambda /report + RDS + CI/CD
 
-First, run the development server:
+**Grupo**:
+
+1. 10420059 - Geovanna da Silva Lima - responsabilidade
+1. 10428380 - Guilherme Soares Santos  - responsabilidade
+1. 10419319 - Lucas Cesar Kato - responsabilidade
+1. 10388037 - Pedro Henrique Mansano Fernandes - responsabilidade
+
+## 1. Visão geral
+<!-- Descreva rapidamente o domínio escolhido, por que foi selecionado e o que o CRUD faz. -->
+
+## 2. Arquitetura
+
+![Diagrama](docs/arquitetura.png)
+
+| Camada | Serviço | Descrição |
+|--------|---------|-----------|
+| Backend | ECS Fargate (ou EC2 + Docker) | Java Spring Boot |
+| Banco   | Amazon RDS              | PostgreSQL / MySQL em subnet privada |
+| Gateway | Amazon API Gateway      | Rotas CRUD → ECS · `/report` → Lambda |
+| Função  | AWS Lambda              | Consome a API, gera estatísticas JSON |
+| CI/CD   | CodePipeline + GitHub   | push → build → ECR → deploy |
+
+## 3. Como rodar localmente
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# Para rodar o front-end:
+ docker run -d -p 8080:3000 delicias-do-dia-front
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Para rodar o back-end: 
+docker run -d -p 25000:8080 delicias-do-dia-back
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# exemplo do prof
+cp .env.example .env         # configure variáveis
+docker compose up --build
+# API em http://localhost:3000
