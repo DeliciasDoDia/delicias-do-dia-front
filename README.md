@@ -19,10 +19,9 @@
 | Camada | Serviço | Descrição |
 |--------|---------|-----------|
 | Backend | ECS Fargate (ou EC2 + Docker) | Java Spring Boot |
-| Banco   | Amazon RDS              | PostgreSQL / MySQL em subnet privada |
+| Banco   | Amazon RDS              | MySQL em subnet privada |
 | Gateway | Amazon API Gateway      | Rotas CRUD → ECS · `/report` → Lambda |
 | Função  | AWS Lambda              | Consome a API, gera estatísticas JSON |
-| CI/CD   | CodePipeline + GitHub   | push → build → ECR → deploy |
 
 ## 3. Como rodar localmente
 
