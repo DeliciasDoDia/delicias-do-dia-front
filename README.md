@@ -5,6 +5,8 @@
 **Grupo**:
 
 1. 10420059 - Geovanna da Silva Lima - Construção do documento, README, diagrama de arquitetura e suporte no Lambda/Gateway.
+1. 10430225 - Bruna França Martinez -
+Contruçao da vpc, sub-redes, grupos de segurança e auxilio na documentação
 1. 10428380 - Guilherme Soares Santos  - Construção do Lambda e Gateway.
 1. 10419319 - Lucas Cesar Kato - Construção do Lambda e Gateway.
 1. 10388037 - Pedro Henrique Mansano Fernandes - Construção do EC2 + Docker e Amazon RDS.
